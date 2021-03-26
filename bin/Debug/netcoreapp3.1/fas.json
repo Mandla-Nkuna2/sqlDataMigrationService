@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "fleet-administration-system",
+  "private_key_id": "95cd464aeb0bea22e784da4ba6429cf050c9223e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC5JU5usswpNz7/\n/HA4+ZpsaSphhbvaGxuxWXDQCbfASOJbTlS24ANiW8PXiPgYYhtb6XJB4MXeQprQ\nMDJqhpGP1K2lEfwnB7OI9f4F0WG7xmFQVaXsq7q0BwJYkyRnFbYg1MVJGwocCL/n\nLJr1YreFvPtpRLao0YSUFoIjgujkAVhlRep4PoqzA+cEufT+v7AAnGGEcFtIwb0W\n/qaZauauF8hn7Vh5uh0jHo0Ri9prVnqAEta3i0vHF1VSK7KVvXBJ7K0A/c4efBb1\n60uRMQEKaBgz2ABEWmaR3W21EGLu4Yg6BTuv4uC2qXLG05MiWSQRGurCLE9OdqTG\nzzvQIItxAgMBAAECggEAAe2QUSaJ6fl2GFy+JJe+erfHI1QXpPwrMrKhh5G8Vj4k\nDkrvkVEd8+ehpNRQ2hHRIrOYrHSH4Z+XBLPlyIEdfFkSKayD5XpRmCuQm+n75FnQ\nNbG99uFBwizAWAtd4bgYCQ7nfYewraKj20dLgffnfOw/Ks/WfkWimuys6awBWxjJ\nyM9tI+eI70AFnR01duwkqIPX6Yk2H38mPqvB7GaaFmxfY/Ida/nrKN/qVU0wPIbv\nW9481FaEJl/aPNChH9MX0drMbGVp0ZfXBJPx2/eT0z0cpkxxH4xloZrnds30SDZv\n7TN/xbTfj/U6kSuhrbnSJJFs2JZgN5MpobAaISNgiQKBgQDjT7njIpRrEx7b2xZY\nY/a2MMaPY4HOE/aJs3k9KJ4PzN0Qg3oh9HWWe3YnBdUGQlqttwgpeiAGBIwFcuSB\nirUMxDvvYOgMJOVl4uDsV9xTl6cbuTl2QDT9jWVCDjyCqblM63u0EZGMNLtqgBTj\n7pP/8OMj8f3hIPlpbaOpm0KdWQKBgQDQgzxd3KvbNzEKLIDeV1FcuF/T5KX4RS5T\n81BsPdJsbn2S/wDGS79bNBwrIkqEDgk8yLFjTGNCTMXhsph5ORce0VdL8IO18Aa3\nK2fcj5V+dLsuvyMb4HiuRa3dNKrMv5y/C4tuUJlIUS5G5VABC9oSXX4IjBvPfdMO\nO/7cP5Yj2QKBgQDO1lL9PQ/0RpfD0p2InJ13tvZWr2MEE+I39pmRbw40rmNRjXFq\nyDjfT0R5ybLHWUWN4IiKxVeyYhzPMHaA8ahBD6bB8Vn1AvXCOioUpPYVEl+6uFZz\nJYWSWkETVET3WF0GgxgzB/F6tNj81cMsjIEbWSQ2JxKu8gRBTMSppl99MQKBgQCQ\nKVwQTSSowKTwMsq6bsZ7A6KFfr1dRH9+XWhKHgghHddGTXY8o1xe801SaTf5yzaJ\nxvwV+ldaHHhnzjHrBhS9IuFnSJfXr2cFN0Zs0Pz73DsaW94rROxLGTPXD7XTL9tw\nnsu87o672BzVuW+x+X7BWdBsmmoT8Bt+6O4RWwk0KQKBgA3hPHfHXBk0nSLXkb8C\nm/nuh818gf0YzmlHz5AbQupfW1woY15jTFcvExB6OL9/6WtrWBkPb/k3fX2VpwBl\nGeqI6yVPI9RSiXlYD1K4d9uvwh4N1Lrq1n70O3DH2K8Cjs1Tp3gZI6ZSzBx9JT0b\ntzeUlTdOK1UIrBgMaHCHE5Q+\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-8f1di@fleet-administration-system.iam.gserviceaccount.com",
+  "client_id": "107255244412138613693",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-8f1di%40fleet-administration-system.iam.gserviceaccount.com"
+}

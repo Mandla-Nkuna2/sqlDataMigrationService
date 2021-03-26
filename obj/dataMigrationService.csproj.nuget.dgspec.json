@@ -1,20 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\brad\\source\\repos\\dataMigrationService\\dataMigrationService.csproj": {}
+    "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\brad\\source\\repos\\dataMigrationService\\dataMigrationService.csproj": {
+    "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\brad\\source\\repos\\dataMigrationService\\dataMigrationService.csproj",
+        "projectUniqueName": "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj",
         "projectName": "dataMigrationService",
-        "projectPath": "C:\\Users\\brad\\source\\repos\\dataMigrationService\\dataMigrationService.csproj",
-        "packagesPath": "C:\\Users\\brad\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\brad\\source\\repos\\dataMigrationService\\obj\\",
+        "projectPath": "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj",
+        "packagesPath": "C:\\Users\\algor\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\brad\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\algor\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -26,7 +29,6 @@
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,7 +40,20 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "Google.Cloud.Firestore": {
+              "target": "Package",
+              "version": "[2.3.0, )"
+            },
+            "Quartz": {
+              "target": "Package",
+              "version": "[3.2.4, )"
+            },
+            "System.Data.SqlClient": {
+              "target": "Package",
+              "version": "[4.8.2, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -57,7 +72,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
