@@ -1,8 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using dataMigrationService.services;
 namespace dataMigrationService.Controllers
@@ -17,23 +14,13 @@ namespace dataMigrationService.Controllers
             return "Add connection string to body";
         }
 
-        [HttpGet("{connString}")]
-        public string Get([FromQuery] string connString)
-        {
-            return connString;
-        }
 
-        [HttpGet("testReal")]
-        public string Test([FromQuery] string connString)
+
+        [HttpGet("startMigration")]
+        public string Test([FromQuery] string connString, string companyName)
         {
-            return "hiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii" + connString;
-        }
-        [HttpGet("keepAlive")]
-        public Task Keep(HttpContext context)
-        {
-            context.Response.ContentType = "text/plain";
-            context.Response.WriteAsync("OK");
-            return data.streamTest();
+            data.startDataMigration(connString, companyName);
+            return "starting" + companyName;
         }
 
     }

@@ -17,9 +17,8 @@ namespace dataMigrationService.services
         FirestoreDb fireStoreDb;
         public async System.Threading.Tasks.Task FirebaseSave(String tableName, String id, Dictionary<string, object> data, String companyName)
         {
-            // initiallising db 
             //service key
-            string filepath = "../../../fas.json";
+            string filepath = "./fas.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", filepath);
             projectId = "fleet-administration-system";
             fireStoreDb = FirestoreDb.Create(projectId);
@@ -29,9 +28,8 @@ namespace dataMigrationService.services
         }
         public int FirebaseCheck(String tableName, String companyName)
         {
-            // initiallising db 
             //service key
-            string filepath = "../../../fas.json";
+            string filepath = "./fas.json";
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", filepath);
             projectId = "fleet-administration-system";
             fireStoreDb = FirestoreDb.Create(projectId);
@@ -55,9 +53,9 @@ namespace dataMigrationService.services
 
                 string tablename = (string)row[2];
                 var s = row.Table.Rows;
-                Console.WriteLine("..........................................................");
-                Console.WriteLine("this is the table name");
-                Console.WriteLine(tablename);
+                System.Diagnostics.Debug.WriteLine("..........................................................");
+                System.Diagnostics.Debug.WriteLine("this is the table name");
+                System.Diagnostics.Debug.WriteLine(tablename);
 
 
                 string oString = "Select * from " + tablename;
@@ -71,11 +69,11 @@ namespace dataMigrationService.services
                 DataRowCollection realRows = dt1.Rows;
                 int a = 0;
                 int firebaseCount = FirebaseCheck(tablename, companyName);
-                Console.WriteLine("started table " + tablename);
-                Console.WriteLine("IN FIREBASE: " + firebaseCount + " ACTUAL : " + realRows.Count);
+                System.Diagnostics.Debug.WriteLine("started table " + tablename);
+                System.Diagnostics.Debug.WriteLine("IN FIREBASE: " + firebaseCount + " ACTUAL : " + realRows.Count);
                 if (realRows.Count <= firebaseCount)
                 {
-                    Console.WriteLine("skipped");
+                    System.Diagnostics.Debug.WriteLine("skipped");
                     continue;
                 }
                 var tasks = new List<Task>();
@@ -105,20 +103,20 @@ namespace dataMigrationService.services
                     long modulus = a % 100;
                     if (modulus == 0)
                     {
-                        Console.WriteLine(a);
-                        Console.WriteLine("waiting for 100 rows to save...");
+                        System.Diagnostics.Debug.WriteLine(a);
+                        System.Diagnostics.Debug.WriteLine("waiting for 100 rows to save...");
                         Task.WhenAll(tasks).Wait();
-                        Console.WriteLine("100 rows saved");
+                        System.Diagnostics.Debug.WriteLine("100 rows saved");
 
                     }
                     a++;
                 }
-                Console.WriteLine("waiting for data to save for table...");
+                System.Diagnostics.Debug.WriteLine("waiting for data to save for table...");
                 Task.WhenAll(tasks).Wait();
-                Console.WriteLine("table " + tablename + "complete");
+                System.Diagnostics.Debug.WriteLine("table " + tablename + "complete");
                 i++;
             }
-            Console.WriteLine(i);
+            System.Diagnostics.Debug.WriteLine(i);
             sqlConnection.Close();
 
         }
@@ -126,12 +124,15 @@ namespace dataMigrationService.services
             Program program = new Program();
             try
             {
+                System.Diagnostics.Debug.WriteLine("started Migration");
                 getData(connString, companyName);
                 return "started";
             }
             catch (Exception e)
             {
-                Console.WriteLine("Exceptions caught");
+                System.Diagnostics.Debug.WriteLine("Exceptions caught");
+                System.Diagnostics.Debug.WriteLine(e);
+
                 scheduleTest(connString, companyName).Wait();
                 return "started wait";
             }
@@ -168,9 +169,9 @@ namespace dataMigrationService.services
         DataExtractor extractor = new DataExtractor();
         public async Task Execute(IJobExecutionContext context)
         {
-            await Console.Out.WriteLineAsync("STARTING AGAIN");
+            System.Diagnostics.Debug.WriteLine("STARTING AGAIN");
             await CancelJob();
-            await Console.Out.WriteLineAsync("job cancelled");
+            System.Diagnostics.Debug.WriteLine("job cancelled");
 
         }
         public async Task CancelJob()
@@ -182,7 +183,7 @@ namespace dataMigrationService.services
             var messageArray =  desc.Split("%%");
             string connString = messageArray[0];
             string companyName = messageArray[1];
-            await Console.Out.WriteLineAsync(desc);
+            System.Diagnostics.Debug.WriteLine(desc);
             await scheduler.Shutdown();
             extractor.startDataMigration(connString, companyName);
         }
