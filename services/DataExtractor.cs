@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 using System.Data;
 using Google.Cloud.Firestore;
 using System.Data.SqlClient;
