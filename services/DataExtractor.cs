@@ -38,6 +38,22 @@ namespace dataMigrationService.services
             int number = fireStoreDb.Collection(companyName).Document(tableName).Collection("tables").GetSnapshotAsync().Result.Documents.Count;
             return number;
         }
+        public async System.Threading.Tasks.Task writeLog(string log)
+        {
+            //service key
+            DateTime now = DateTime.Now;
+            string currentDateTime = now.ToString("yyyy/MM/dd/hh:mm:ss");
+            Dictionary<string, object> docData = new Dictionary<string, object> { };
+            docData.Add("date", currentDateTime);
+            docData.Add("log", log);
+            string filepath = "./test.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", filepath);
+            projectId = "test1-5d360";
+            fireStoreDb = FirestoreDb.Create(projectId);
+            //................................................
+            //saving to db
+            await fireStoreDb.Collection("logs").Document(currentDateTime).SetAsync(docData);
+        }
         public void getData(string connectionString, string companyName)
         {
             DataTable myTable = new DataTable("tables");
@@ -54,8 +70,10 @@ namespace dataMigrationService.services
                 string tablename = (string)row[2];
                 var s = row.Table.Rows;
                 System.Diagnostics.Debug.WriteLine("..........................................................");
+                writeLog("this is the table name");
                 System.Diagnostics.Debug.WriteLine("this is the table name");
                 System.Diagnostics.Debug.WriteLine(tablename);
+                writeLog(tablename);
 
 
                 string oString = "Select * from " + tablename;
@@ -71,9 +89,12 @@ namespace dataMigrationService.services
                 int firebaseCount = FirebaseCheck(tablename, companyName);
                 System.Diagnostics.Debug.WriteLine("started table " + tablename);
                 System.Diagnostics.Debug.WriteLine("IN FIREBASE: " + firebaseCount + " ACTUAL : " + realRows.Count);
+                writeLog("started table " + tablename);
+                writeLog("IN FIREBASE: " + firebaseCount + " ACTUAL : " + realRows.Count);
                 if (realRows.Count <= firebaseCount)
                 {
                     System.Diagnostics.Debug.WriteLine("skipped");
+                    writeLog("skipped");
                     continue;
                 }
                 var tasks = new List<Task>();
@@ -108,12 +129,14 @@ namespace dataMigrationService.services
                         Task.WhenAll(tasks).Wait();
                         System.Diagnostics.Debug.WriteLine("100 rows saved");
 
+
                     }
                     a++;
                 }
                 System.Diagnostics.Debug.WriteLine("waiting for data to save for table...");
                 Task.WhenAll(tasks).Wait();
                 System.Diagnostics.Debug.WriteLine("table " + tablename + "complete");
+                writeLog("table " + tablename + "complete");
                 i++;
             }
             System.Diagnostics.Debug.WriteLine(i);
@@ -125,14 +148,16 @@ namespace dataMigrationService.services
             try
             {
                 System.Diagnostics.Debug.WriteLine("started Migration");
+                writeLog("started migration");
                 getData(connString, companyName);
                 return "started";
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("Exceptions caught");
+                writeLog("Exceptions caught");
                 System.Diagnostics.Debug.WriteLine(e);
-
+                writeLog(e.ToString());
                 scheduleTest(connString, companyName).Wait();
                 return "started wait";
             }
@@ -170,8 +195,10 @@ namespace dataMigrationService.services
         public async Task Execute(IJobExecutionContext context)
         {
             System.Diagnostics.Debug.WriteLine("STARTING AGAIN");
+            extractor.writeLog("started again");
             await CancelJob();
             System.Diagnostics.Debug.WriteLine("job cancelled");
+            extractor.writeLog("job cancelled");
 
         }
         public async Task CancelJob()

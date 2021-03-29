@@ -2,8 +2,9 @@
   "ExpandedNodes": [
     "",
     "\\Controllers",
-    "\\obj"
+    "\\obj",
+    "\\services"
   ],
-  "SelectedNode": "\\Startup.cs",
+  "SelectedNode": "\\Program.cs",
   "PreviewInSolutionExplorer": false
 }
