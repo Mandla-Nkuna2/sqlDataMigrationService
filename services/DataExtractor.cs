@@ -42,7 +42,7 @@ namespace dataMigrationService.services
         {
             //service key
             DateTime now = DateTime.Now;
-            string currentDateTime = now.ToString("yyyy/MM/dd/hh:mm:ss");
+            string currentDateTime = now.ToString("yyyy-MM-dd-hh:mm:ss");
             Dictionary<string, object> docData = new Dictionary<string, object> { };
             docData.Add("date", currentDateTime);
             docData.Add("log", log);
@@ -70,10 +70,10 @@ namespace dataMigrationService.services
                 string tablename = (string)row[2];
                 var s = row.Table.Rows;
                 System.Diagnostics.Debug.WriteLine("..........................................................");
-                writeLog("this is the table name");
+                writeLog("this is the table name").Wait();
                 System.Diagnostics.Debug.WriteLine("this is the table name");
                 System.Diagnostics.Debug.WriteLine(tablename);
-                writeLog(tablename);
+                writeLog(tablename).Wait();
 
 
                 string oString = "Select * from " + tablename;
@@ -89,12 +89,12 @@ namespace dataMigrationService.services
                 int firebaseCount = FirebaseCheck(tablename, companyName);
                 System.Diagnostics.Debug.WriteLine("started table " + tablename);
                 System.Diagnostics.Debug.WriteLine("IN FIREBASE: " + firebaseCount + " ACTUAL : " + realRows.Count);
-                writeLog("started table " + tablename);
-                writeLog("IN FIREBASE: " + firebaseCount + " ACTUAL : " + realRows.Count);
+                writeLog("started table " + tablename).Wait();
+                writeLog("IN FIREBASE: " + firebaseCount + " ACTUAL : " + realRows.Count).Wait();
                 if (realRows.Count <= firebaseCount)
                 {
                     System.Diagnostics.Debug.WriteLine("skipped");
-                    writeLog("skipped");
+                    writeLog("skipped").Wait();
                     continue;
                 }
                 var tasks = new List<Task>();
@@ -136,7 +136,7 @@ namespace dataMigrationService.services
                 System.Diagnostics.Debug.WriteLine("waiting for data to save for table...");
                 Task.WhenAll(tasks).Wait();
                 System.Diagnostics.Debug.WriteLine("table " + tablename + "complete");
-                writeLog("table " + tablename + "complete");
+                writeLog("table " + tablename + "complete").Wait();
                 i++;
             }
             System.Diagnostics.Debug.WriteLine(i);
@@ -148,16 +148,16 @@ namespace dataMigrationService.services
             try
             {
                 System.Diagnostics.Debug.WriteLine("started Migration");
-                writeLog("started migration");
+                writeLog("started migration").Wait();
                 getData(connString, companyName);
                 return "started";
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("Exceptions caught");
-                writeLog("Exceptions caught");
+                writeLog("Exceptions caught").Wait();
                 System.Diagnostics.Debug.WriteLine(e);
-                writeLog(e.ToString());
+                writeLog(e.ToString()).Wait();
                 scheduleTest(connString, companyName).Wait();
                 return "started wait";
             }
@@ -177,7 +177,7 @@ namespace dataMigrationService.services
             // Trigger the job to run now, and then every 40 seconds
             ITrigger trigger = TriggerBuilder.Create()
                .WithIdentity("trigger3", "group1")
-               .WithCronSchedule("0 * * ? * *")
+               .WithCronSchedule("0 8 * * *")
                .ForJob("myJob", "group1")
                .Build();
 
@@ -195,10 +195,10 @@ namespace dataMigrationService.services
         public async Task Execute(IJobExecutionContext context)
         {
             System.Diagnostics.Debug.WriteLine("STARTING AGAIN");
-            extractor.writeLog("started again");
+            extractor.writeLog("started again").Wait();
             await CancelJob();
             System.Diagnostics.Debug.WriteLine("job cancelled");
-            extractor.writeLog("job cancelled");
+            extractor.writeLog("job cancelled").Wait();
 
         }
         public async Task CancelJob()
