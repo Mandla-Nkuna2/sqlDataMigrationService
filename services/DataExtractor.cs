@@ -177,7 +177,7 @@ namespace dataMigrationService.services
             // Trigger the job to run now, and then every 40 seconds
             ITrigger trigger = TriggerBuilder.Create()
                .WithIdentity("trigger3", "group1")
-               .WithCronSchedule("0 8 * * *")
+               .WithCronSchedule("0 * * ? * *")
                .ForJob("myJob", "group1")
                .Build();
 
@@ -188,6 +188,7 @@ namespace dataMigrationService.services
             await Task.Delay(1000, source.Token);
 
         }
+
     }
     public class Job : IJob
     {

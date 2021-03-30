@@ -1,30 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj": {}
+    "/root/projects/dataMigrationService/dataMigrationService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj": {
+    "/root/projects/dataMigrationService/dataMigrationService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj",
+        "projectUniqueName": "/root/projects/dataMigrationService/dataMigrationService.csproj",
         "projectName": "dataMigrationService",
-        "projectPath": "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\dataMigrationService.csproj",
-        "packagesPath": "C:\\Users\\algor\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\algor\\Documents\\innovativeThinking\\dataMigrationService\\obj\\",
+        "projectPath": "/root/projects/dataMigrationService/dataMigrationService.csproj",
+        "packagesPath": "/root/.nuget/packages/",
+        "outputPath": "/root/projects/dataMigrationService/obj/",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\algor\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/root/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -72,7 +67,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/share/dotnet/sdk/3.1.407/RuntimeIdentifierGraph.json"
         }
       }
     }
