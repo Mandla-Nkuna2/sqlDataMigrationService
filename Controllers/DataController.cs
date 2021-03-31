@@ -9,6 +9,8 @@ namespace dataMigrationService.Controllers
     public class DataController : ControllerBase
     {
         DataExtractor data = new DataExtractor();
+
+
         public string GetAll()
         {
             return "Add connection string to body";
@@ -17,9 +19,9 @@ namespace dataMigrationService.Controllers
 
 
         [HttpGet("startMigration")]
-        public string Test([FromQuery] string connString, string companyName)
+        public string Test([FromQuery] string connString, string companyName, string key)
         {
-            data.startDataMigration(connString, companyName);
+            data.startDataMigration(connString, companyName, key);
             return "starting" + companyName;
         }
 

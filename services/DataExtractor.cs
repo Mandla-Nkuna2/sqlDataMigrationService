@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using Quartz.Impl;
 using Quartz;
 using System.Threading;
+using dataMigrationService.Controllers;
 
 namespace dataMigrationService.services
 {
@@ -37,6 +38,27 @@ namespace dataMigrationService.services
             //saving to db
             int number = fireStoreDb.Collection(companyName).Document(tableName).Collection("tables").GetSnapshotAsync().Result.Documents.Count;
             return number;
+        }
+        public  Boolean StateCheck( String key)
+        {
+            //service key
+            string filepath = "./test.json";
+            Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", filepath);
+            projectId = "test1-5d360";
+            fireStoreDb = FirestoreDb.Create(projectId);
+            DocumentReference docRef = fireStoreDb.Collection("states").Document(key);
+            var result = docRef.GetSnapshotAsync().Result.GetValue<string>("state");
+            Boolean active = false;
+            if (result == "active")
+            {
+                active = true;
+            }
+            else
+            {
+                active = false;
+            }
+            return active;
+
         }
         public async System.Threading.Tasks.Task writeLog(string log)
         {
@@ -143,26 +165,38 @@ namespace dataMigrationService.services
             sqlConnection.Close();
 
         }
-        public  string startDataMigration(string connString, string companyName) {
+        public  string startDataMigration(string connString, string companyName, string key) {
             Program program = new Program();
             try
             {
-                System.Diagnostics.Debug.WriteLine("started Migration");
-                writeLog("started migration").Wait();
-                getData(connString, companyName);
-                return "started";
+                if (StateCheck(key) ==true) {
+                    System.Diagnostics.Debug.WriteLine(StateCheck(key));
+                    System.Diagnostics.Debug.WriteLine("started Migration");
+                    writeLog("started migration").Wait();
+                    getData(connString, companyName);
+                    return "started";
+
+                }
+                else {
+                    return "state not active";
+                }
             }
             catch (Exception e)
             {
                 System.Diagnostics.Debug.WriteLine("Exceptions caught");
-                writeLog("Exceptions caught").Wait();
                 System.Diagnostics.Debug.WriteLine(e);
+
+                writeLog("Exceptions caught").Wait();
                 writeLog(e.ToString()).Wait();
-                scheduleTest(connString, companyName).Wait();
+                if(StateCheck(key) == true)
+                {
+                    scheduleTest(connString, companyName, key).Wait();
+
+                }
                 return "started wait";
             }
         }
-        public async System.Threading.Tasks.Task scheduleTest(string connString, string companyName)
+        public async System.Threading.Tasks.Task scheduleTest(string connString, string companyName, string key)
         {
             StdSchedulerFactory factory = new StdSchedulerFactory();
 
@@ -171,7 +205,7 @@ namespace dataMigrationService.services
             await scheduler.Start();
             // define the job and tie it to our HelloJob class
             IJobDetail job = JobBuilder.Create<Job>()
-                .WithIdentity("myJob", "group1").WithDescription(connString+"%%"+ companyName)
+                .WithIdentity("myJob", "group1").WithDescription(connString+"%%"+ companyName+ "%%" + key)
                 .Build();
 
             // Trigger the job to run now, and then every 40 seconds
@@ -211,9 +245,10 @@ namespace dataMigrationService.services
             var messageArray =  desc.Split("%%");
             string connString = messageArray[0];
             string companyName = messageArray[1];
+            string myKey = messageArray[2];
             System.Diagnostics.Debug.WriteLine(desc);
             await scheduler.Shutdown();
-            extractor.startDataMigration(connString, companyName);
+            extractor.startDataMigration(connString, companyName, myKey);
         }
     }
 }
